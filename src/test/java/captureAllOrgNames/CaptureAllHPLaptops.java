@@ -1,0 +1,49 @@
+package captureAllOrgNames;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class CaptureAllHPLaptops {
+
+	public static void main(String[] args) throws InterruptedException {
+		//launch the browser
+		WebDriver driver =new ChromeDriver();
+						
+		//maximize the window
+		driver.manage().window().maximize();
+					
+		//load the url
+		driver.get("https://www.amazon.com/");
+		Thread.sleep(2000);
+						
+		//search for the element
+		driver.findElement(By.id("twotabsearchtextbox")).sendKeys("laptops", Keys.ENTER);
+				
+		//click on search button
+		//driver.findElement(By.id("nav-search-submit-button")).click();
+		
+		//capture all the HP laptops 
+		Thread.sleep(2000);
+		List<WebElement> list = driver.findElements(By.xpath("//span[@class='a-size-medium a-color-base a-text-normal']"));
+		for(WebElement ele:list)
+		{
+			String text = ele.getText();
+			if(text.contains("HP"))
+			{
+				Thread .sleep(2000);
+				System.out.println(ele.getText());
+				ele.click();
+				break;
+				
+			}
+		}
+
+
+	}
+
+}
